@@ -53,7 +53,7 @@ public class SlotMachine {
     }
 
     protected void initializeReels() {
-        Random random = new Random();
+        Random random = new Random(); // instance of random class created
         for (int row = 0; row < reels.length; row++) {
             for (int col = 0; col < 4; col++) {
                 int randomValue = random.nextInt(4) + 1;
@@ -112,38 +112,43 @@ public class SlotMachine {
     }
 
     public void play() {
-        int counter = 0;
+        int counter = 0; //variable initialized, Keeps track of number of rounds the player plays
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("\n\n----------------------------------------------\n"
                 + "<<<< WELCOME TO THE SLOT MACHINE >>>>\n----------------------------------------------"
                 + "\n");
 
-        while (balance >= betAmount) {
+        while (balance >= betAmount) {  // Check if the player has enough balance to continue playing
             System.out.println("Your Balance: R" + balance);
             System.out.println("Bet Amount: R" + betAmount + "\n");
+            // Prompt the player to spin the reels or cash out
             System.out.print("Press ENTER to spin the reels or 'C' to cashout:\n\n---------------------------------------------------------");
             String input = scanner.nextLine();
 
+            // If the player enters 'C', exit the loop and end the game
             if (input.equalsIgnoreCase("c")) {
                 break;
             }
 
-            balance -= betAmount;
+            balance -= betAmount;// subtract the bet amount from the balance
 
             initializeReels(); // Initialize the reels with new values
-            counter++;
+            counter++; //increment the counter
+            // Display the current state of the reels for this round
             System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>> ROUND " + counter + ": >>>>>>>>>>>>>>>>>>>>>>\n---------------------------------------------------------\n" + reels[0][0] + "  " + reels[0][1] + "  " + reels[0][2] + "  " + reels[0][3] + "\n");
 
             double winAmount = calculateWin();
 
             if (winAmount > 0) {
+                // If the player has won, display a message
                 System.out.println("\nCONGRATULATIONS >>> You WON: R" + winAmount);
             } else {
+                // If no win, display a no win messgae
                 System.out.println("NO win this time :(");
             }
 
-            balance += winAmount;
+            balance += winAmount;// Adds the win amount to the player's balance
 
         }//end while
 
