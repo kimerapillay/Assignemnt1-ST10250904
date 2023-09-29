@@ -22,10 +22,14 @@ public class ClassicSlotMachine extends SlotMachine {
     //Random class used to generate random values in range 1 to 4 then convert it to the appropriate string and save it in the 2D Array
     @Override
     protected void initializeReels() {
-        Random random = new Random();
+        Random random = new Random(); // instance of random class created
+
+        //These nested for loops iterate through each row and column of the slot machine reels...
         for (int row = 0; row < reels.length; row++) {
             for (int col = 0; col < 4; col++) {
-                int randomValue = random.nextInt(4) + 1;
+
+                int randomValue = random.nextInt(4) + 1; //generates a random number between 1 and 4 and assigns it to the variable
+
                 switch (randomValue) {
                     case 1:
                         reels[row][col] = "CLOVER";
@@ -39,20 +43,21 @@ public class ClassicSlotMachine extends SlotMachine {
                     case 4:
                         reels[row][col] = "QUESTIONMARK?";
                         break;
-                }
-            }
-        }
+                }//end switch
+
+            }//end for loop 2
+        }//end for loop 1
     }
 
     @Override
     protected double calculateWin() {
-        if (reels.length > 0) {
-            for (int row = 0; row < reels.length; row++) {
-                boolean sameSymbols = true; // Flag to check if all symbols in the row are the same
+        if (reels.length > 0) {//checks to ensure there is atleast one row of reels then starts the game...
+            for (int row = 0; row < reels.length; row++) { //iterates through each row in reels array
+                boolean sameSymbols = true; // check if all symbols in the row are the same and set boolean variable to true
                 for (int col = 1; col < 4; col++) {
-                    if (!reels[row][col].equals(reels[row][0])) {
-                        sameSymbols = false;
-                        break; // Not all symbols in this row are the same
+                    if (!reels[row][col].equals(reels[row][0])) {//checks if all sybols are the same
+                        sameSymbols = false; // Not all symbols in this row are the same
+                        break;
                     }
                 }//end for 2
                 if (sameSymbols) {
